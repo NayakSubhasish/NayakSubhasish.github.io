@@ -1419,10 +1419,12 @@
   z-index: 2000;
   transition: transform 0.5s ease;
   min-width: 300px;
+  display: none;
 }
 
 .achievement-notification.show {
   transform: translateX(-50%) translateY(0);
+  display: block;
 }
 
 .achievement-content {
@@ -1761,6 +1763,15 @@
   --bg-color: #1a1a1a;
 }
 
+[data-theme="dark"] body {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%) !important;
+  color: #ecf0f1 !important;
+}
+
+[data-theme="dark"] .hero {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%) !important;
+}
+
 [data-theme="blue"] {
   --primary-color: #3498db;
   --secondary-color: #2980b9;
@@ -1769,12 +1780,47 @@
   --bg-color: #ecf0f1;
 }
 
+[data-theme="blue"] body {
+  background: linear-gradient(135deg, #ecf0f1 0%, #3498db 100%) !important;
+  color: #2c3e50 !important;
+}
+
+[data-theme="blue"] .hero {
+  background: linear-gradient(135deg, #ecf0f1 0%, #3498db 100%) !important;
+}
+
 [data-theme="purple"] {
   --primary-color: #9b59b6;
   --secondary-color: #8e44ad;
   --accent-color: #e74c3c;
   --text-color: #2c3e50;
   --bg-color: #f8f9fa;
+}
+
+[data-theme="purple"] body {
+  background: linear-gradient(135deg, #f8f9fa 0%, #9b59b6 100%) !important;
+  color: #2c3e50 !important;
+}
+
+[data-theme="purple"] .hero {
+  background: linear-gradient(135deg, #f8f9fa 0%, #9b59b6 100%) !important;
+}
+
+[data-theme="default"] {
+  --primary-color: #ffbd39;
+  --secondary-color: #ff6b35;
+  --accent-color: #27ae60;
+  --text-color: #333;
+  --bg-color: #fff;
+}
+
+[data-theme="default"] body {
+  background: linear-gradient(135deg, #fff 0%, #ffbd39 100%) !important;
+  color: #333 !important;
+}
+
+[data-theme="default"] .hero {
+  background: linear-gradient(135deg, #fff 0%, #ffbd39 100%) !important;
 }
 
 /* Accessibility Modes */
@@ -3921,6 +3967,9 @@
               // Hide form and show success message
               contactForm.style.display = 'none';
               
+              // Unlock contact form achievement
+              unlockAchievement('contact_form');
+              
               const successMessage = document.createElement('div');
               successMessage.className = 'form-success';
               successMessage.innerHTML = `
@@ -4102,11 +4151,25 @@
         title.textContent = achievement.title;
         description.textContent = achievement.description;
         
+        // Show notification with animation
+        notification.style.display = 'block';
         notification.classList.add('show');
+        
+        // Play notification sound (if supported)
+        try {
+          const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBS13yO/eizEIHWq+8+OWT');
+          audio.volume = 0.3;
+          audio.play().catch(() => {}); // Ignore errors if audio fails
+        } catch (e) {
+          // Ignore audio errors
+        }
         
         setTimeout(() => {
           notification.classList.remove('show');
-        }, 3000);
+          setTimeout(() => {
+            notification.style.display = 'none';
+          }, 500);
+        }, 4000);
       }
     }
     
@@ -4258,7 +4321,13 @@
     }
     
     function changeColorScheme(theme) {
+      // Remove existing theme classes
+      document.documentElement.removeAttribute('data-theme');
+      document.body.classList.remove('theme-default', 'theme-dark', 'theme-blue', 'theme-purple');
+      
+      // Apply new theme
       document.documentElement.setAttribute('data-theme', theme);
+      document.body.classList.add(`theme-${theme}`);
       localStorage.setItem('theme', theme);
       
       // Update active state
@@ -4270,7 +4339,48 @@
         activeScheme.classList.add('active');
       }
       
+      // Apply theme-specific styles
+      applyThemeStyles(theme);
+      
       unlockAchievement('theme_changer');
+    }
+    
+    function applyThemeStyles(theme) {
+      const root = document.documentElement;
+      
+      switch(theme) {
+        case 'dark':
+          root.style.setProperty('--primary-color', '#2c3e50');
+          root.style.setProperty('--secondary-color', '#34495e');
+          root.style.setProperty('--accent-color', '#3498db');
+          root.style.setProperty('--text-color', '#ecf0f1');
+          root.style.setProperty('--bg-color', '#1a1a1a');
+          document.body.style.background = 'linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%)';
+          break;
+        case 'blue':
+          root.style.setProperty('--primary-color', '#3498db');
+          root.style.setProperty('--secondary-color', '#2980b9');
+          root.style.setProperty('--accent-color', '#2ecc71');
+          root.style.setProperty('--text-color', '#2c3e50');
+          root.style.setProperty('--bg-color', '#ecf0f1');
+          document.body.style.background = 'linear-gradient(135deg, #ecf0f1 0%, #3498db 100%)';
+          break;
+        case 'purple':
+          root.style.setProperty('--primary-color', '#9b59b6');
+          root.style.setProperty('--secondary-color', '#8e44ad');
+          root.style.setProperty('--accent-color', '#e74c3c');
+          root.style.setProperty('--text-color', '#2c3e50');
+          root.style.setProperty('--bg-color', '#f8f9fa');
+          document.body.style.background = 'linear-gradient(135deg, #f8f9fa 0%, #9b59b6 100%)';
+          break;
+        default:
+          root.style.setProperty('--primary-color', '#ffbd39');
+          root.style.setProperty('--secondary-color', '#ff6b35');
+          root.style.setProperty('--accent-color', '#27ae60');
+          root.style.setProperty('--text-color', '#333');
+          root.style.setProperty('--bg-color', '#fff');
+          document.body.style.background = 'linear-gradient(135deg, #fff 0%, #ffbd39 100%)';
+      }
     }
     
     function toggleHighContrast() {
@@ -4452,6 +4562,10 @@
       // Load saved progress
       loadProgress();
       
+      // Initialize theme
+      const savedTheme = localStorage.getItem('theme') || 'default';
+      changeColorScheme(savedTheme);
+      
       // Initialize accessibility settings
       if (localStorage.getItem('highContrast') === 'true') {
         document.body.classList.add('high-contrast');
@@ -4494,6 +4608,38 @@
       
       // Override project modal function to include tracking
       window.openProjectModal = openProjectModalEnhanced;
+      
+      // Initialize achievement system
+      updateAchievements();
+      updateProgress();
+      
+      // Debug function for testing (remove in production)
+      window.debugPortfolio = {
+        unlockAllAchievements: () => {
+          achievements.forEach(achievement => {
+            achievement.unlocked = true;
+          });
+          updateAchievements();
+          saveProgress();
+        },
+        resetAchievements: () => {
+          achievements.forEach(achievement => {
+            achievement.unlocked = false;
+          });
+          visitedSections.clear();
+          viewedProjects.clear();
+          portfolioProgress = 0;
+          updateAchievements();
+          updateProgress();
+          saveProgress();
+        },
+        testTheme: (theme) => {
+          changeColorScheme(theme);
+        },
+        testAchievement: (id) => {
+          unlockAchievement(id);
+        }
+      };
     });
     
     // 3D Elements and WebGL Effects
