@@ -1284,6 +1284,893 @@
   }
 }
 
+/* Gamification System */
+.gamification-panel {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 189, 57, 0.3);
+  z-index: 1500;
+  transform: translateX(350px);
+  transition: transform 0.3s ease;
+}
+
+.gamification-panel.open {
+  transform: translateX(0);
+}
+
+.gamification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255, 189, 57, 0.3);
+}
+
+.gamification-header h4 {
+  margin: 0;
+  color: #ffbd39;
+  font-size: 1.2rem;
+}
+
+.close-gamification {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.close-gamification:hover {
+  color: #e74c3c;
+}
+
+.achievement-list {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.achievement-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: rgba(255, 189, 57, 0.1);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+.achievement-item.unlocked {
+  opacity: 1;
+  background: rgba(39, 174, 96, 0.1);
+  border: 2px solid #27ae60;
+}
+
+.achievement-icon {
+  font-size: 1.5rem;
+  margin-right: 10px;
+}
+
+.achievement-info h5 {
+  margin: 0 0 5px 0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.achievement-info p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.progress-tracker {
+  text-align: center;
+}
+
+.progress-tracker h5 {
+  margin: 0 0 10px 0;
+  color: #ffbd39;
+  font-size: 1rem;
+}
+
+.gamification-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #ffbd39, #ff6b35);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255, 189, 57, 0.4);
+}
+
+.gamification-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(255, 189, 57, 0.6);
+}
+
+/* Achievement Notification */
+.achievement-notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  background: linear-gradient(45deg, #27ae60, #2ecc71);
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  z-index: 2000;
+  transition: transform 0.5s ease;
+  min-width: 300px;
+}
+
+.achievement-notification.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+.achievement-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.achievement-icon {
+  font-size: 2rem;
+}
+
+.achievement-text h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+}
+
+.achievement-text p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Quiz Modal */
+.quiz-modal-content {
+  max-width: 600px;
+}
+
+.quiz-question {
+  margin-bottom: 30px;
+}
+
+.quiz-question h3 {
+  color: #ffbd39;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-option {
+  padding: 15px;
+  background: rgba(255, 189, 57, 0.1);
+  border: 2px solid rgba(255, 189, 57, 0.3);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.quiz-option:hover {
+  background: rgba(255, 189, 57, 0.2);
+  border-color: #ffbd39;
+  transform: translateY(-2px);
+}
+
+.quiz-option.selected {
+  background: rgba(255, 189, 57, 0.3);
+  border-color: #ffbd39;
+}
+
+.quiz-option.correct {
+  background: rgba(39, 174, 96, 0.2);
+  border-color: #27ae60;
+  color: #27ae60;
+}
+
+.quiz-option.incorrect {
+  background: rgba(231, 76, 60, 0.2);
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+.quiz-progress {
+  margin-top: 20px;
+}
+
+.quiz-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 189, 57, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  background: linear-gradient(45deg, #ffbd39, #ff6b35);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.quiz-results {
+  text-align: center;
+  padding: 20px;
+}
+
+.quiz-score {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ffbd39;
+  margin: 20px 0;
+}
+
+/* Theme Customization */
+.theme-panel {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 300px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 189, 57, 0.3);
+  z-index: 1500;
+  transform: translateX(-350px);
+  transition: transform 0.3s ease;
+}
+
+.theme-panel.open {
+  transform: translateX(0);
+}
+
+.theme-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255, 189, 57, 0.3);
+}
+
+.theme-header h4 {
+  margin: 0;
+  color: #ffbd39;
+  font-size: 1.2rem;
+}
+
+.close-theme {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.close-theme:hover {
+  color: #e74c3c;
+}
+
+.theme-section {
+  margin-bottom: 25px;
+}
+
+.theme-section h5 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 1rem;
+}
+
+.color-schemes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.color-scheme {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.color-scheme:hover {
+  background: rgba(255, 189, 57, 0.1);
+}
+
+.color-scheme.active {
+  border-color: #ffbd39;
+  background: rgba(255, 189, 57, 0.1);
+}
+
+.color-preview {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-bottom: 8px;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.color-preview.default {
+  background: linear-gradient(45deg, #ffbd39, #ff6b35);
+}
+
+.color-preview.dark {
+  background: linear-gradient(45deg, #2c3e50, #34495e);
+}
+
+.color-preview.blue {
+  background: linear-gradient(45deg, #3498db, #2980b9);
+}
+
+.color-preview.purple {
+  background: linear-gradient(45deg, #9b59b6, #8e44ad);
+}
+
+.accessibility-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.accessibility-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.accessibility-option:hover {
+  background: rgba(255, 189, 57, 0.1);
+}
+
+.accessibility-option input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #ffbd39;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #9b59b6, #8e44ad);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(155, 89, 182, 0.6);
+}
+
+/* Language Selector */
+.language-selector {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1600;
+}
+
+.language-btn {
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.language-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(52, 152, 219, 0.6);
+}
+
+.language-menu {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(52, 152, 219, 0.3);
+  margin-bottom: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.language-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.language-option {
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.language-option:hover {
+  background: rgba(52, 152, 219, 0.1);
+}
+
+/* Theme Variations */
+[data-theme="dark"] {
+  --primary-color: #2c3e50;
+  --secondary-color: #34495e;
+  --accent-color: #3498db;
+  --text-color: #ecf0f1;
+  --bg-color: #1a1a1a;
+}
+
+[data-theme="blue"] {
+  --primary-color: #3498db;
+  --secondary-color: #2980b9;
+  --accent-color: #2ecc71;
+  --text-color: #2c3e50;
+  --bg-color: #ecf0f1;
+}
+
+[data-theme="purple"] {
+  --primary-color: #9b59b6;
+  --secondary-color: #8e44ad;
+  --accent-color: #e74c3c;
+  --text-color: #2c3e50;
+  --bg-color: #f8f9fa;
+}
+
+/* Accessibility Modes */
+.high-contrast {
+  filter: contrast(150%) brightness(120%);
+}
+
+.large-text {
+  font-size: 1.2em;
+}
+
+.large-text h1 { font-size: 2.5em; }
+.large-text h2 { font-size: 2em; }
+.large-text h3 { font-size: 1.5em; }
+
+.reduced-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .gamification-panel,
+  .theme-panel {
+    width: 90%;
+    left: 5%;
+    right: 5%;
+    transform: translateY(-100%);
+  }
+  
+  .gamification-panel.open,
+  .theme-panel.open {
+    transform: translateY(0);
+  }
+  
+  .gamification-toggle,
+  .theme-toggle {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+  
+  .language-selector {
+    bottom: 80px;
+  }
+}
+
+/* 3D Elements and WebGL Effects */
+.webgl-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.webgl-container.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#webgl-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.webgl-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.btn-3d {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.btn-3d:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+/* 3D Project Cards */
+.project-3d-container {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  perspective: 1000px;
+  z-index: 2000;
+}
+
+.project-3d-container.active {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-3d-card {
+  width: 200px;
+  height: 250px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+  cursor: pointer;
+}
+
+.project-3d-card:hover {
+  transform: rotateY(180deg);
+}
+
+.project-3d-front,
+.project-3d-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.project-3d-front {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.project-3d-back {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.project-3d-front h3,
+.project-3d-back h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.project-3d-front p,
+.project-3d-back p {
+  margin: 0 0 15px 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.project-3d-back button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.project-3d-back button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Enhanced 3D Tech Icons */
+.tech-icon-3d {
+  position: absolute;
+  font-size: 2rem;
+  animation: float3D 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.tech-icon-3d:nth-child(1) {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+  transform: rotateX(15deg) rotateY(45deg);
+}
+
+.tech-icon-3d:nth-child(2) {
+  top: 30%;
+  right: 15%;
+  animation-delay: 1s;
+  transform: rotateX(-15deg) rotateY(-45deg);
+}
+
+.tech-icon-3d:nth-child(3) {
+  bottom: 25%;
+  left: 20%;
+  animation-delay: 2s;
+  transform: rotateX(30deg) rotateY(60deg);
+}
+
+.tech-icon-3d:nth-child(4) {
+  bottom: 35%;
+  right: 10%;
+  animation-delay: 3s;
+  transform: rotateX(-30deg) rotateY(-60deg);
+}
+
+@keyframes float3D {
+  0%, 100% {
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: translateY(-20px) rotateX(15deg) rotateY(45deg);
+  }
+  50% {
+    transform: translateY(-10px) rotateX(0deg) rotateY(90deg);
+  }
+  75% {
+    transform: translateY(-30px) rotateX(-15deg) rotateY(135deg);
+  }
+}
+
+/* 3D Parallax Layers */
+.parallax-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -2;
+}
+
+.parallax-layer-1 {
+  background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%);
+  transform: translateZ(-100px);
+}
+
+.parallax-layer-2 {
+  background: radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+  transform: translateZ(-200px);
+}
+
+.parallax-layer-3 {
+  background: radial-gradient(circle at 60% 60%, rgba(255, 219, 120, 0.1) 0%, transparent 50%);
+  transform: translateZ(-300px);
+}
+
+/* 3D Hover Effects */
+.project-card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.project-card-3d:hover {
+  transform: rotateX(5deg) rotateY(5deg) translateZ(20px);
+}
+
+.skill-item-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.skill-item-3d:hover {
+  transform: rotateX(10deg) translateZ(10px);
+}
+
+/* 3D Text Effects */
+.text-3d {
+  text-shadow: 
+    1px 1px 0 #ccc,
+    2px 2px 0 #c9c9c9,
+    3px 3px 0 #bbb,
+    4px 4px 0 #b9b9b9,
+    5px 5px 0 #aaa,
+    6px 6px 1px rgba(0,0,0,.1),
+    0 0 5px rgba(0,0,0,.1),
+    1px 1px 3px rgba(0,0,0,.3),
+    3px 3px 5px rgba(0,0,0,.2),
+    5px 5px 10px rgba(0,0,0,.25);
+}
+
+/* 3D Button Effects */
+.btn-3d-effect {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.btn-3d-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+  border-radius: inherit;
+  transform: translateZ(-1px);
+  transition: transform 0.3s ease;
+}
+
+.btn-3d-effect:hover {
+  transform: translateZ(5px);
+}
+
+.btn-3d-effect:hover::before {
+  transform: translateZ(-5px);
+}
+
+/* 3D Modal Effects */
+.modal-3d {
+  transform-style: preserve-3d;
+  animation: modalSlideIn3D 0.5s ease-out;
+}
+
+@keyframes modalSlideIn3D {
+  from {
+    transform: translateZ(-100px) rotateX(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateZ(0) rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+/* 3D Loading Animation */
+.loading-3d {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 189, 57, 0.3);
+  border-top: 3px solid #ffbd39;
+  border-radius: 50%;
+  animation: spin3D 1s linear infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes spin3D {
+  0% { transform: rotateY(0deg) rotateX(0deg); }
+  25% { transform: rotateY(90deg) rotateX(0deg); }
+  50% { transform: rotateY(180deg) rotateX(90deg); }
+  75% { transform: rotateY(270deg) rotateX(180deg); }
+  100% { transform: rotateY(360deg) rotateX(360deg); }
+}
+
+/* Responsive 3D Design */
+@media (max-width: 768px) {
+  .project-3d-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .project-3d-card {
+    width: 150px;
+    height: 200px;
+  }
+  
+  .webgl-controls {
+    bottom: 10px;
+    left: 10px;
+    flex-direction: column;
+  }
+  
+  .btn-3d {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+  
+  .tech-icon-3d {
+    font-size: 1.5rem;
+  }
+}
+
 
 </style>
 
@@ -2525,6 +3412,188 @@
   <!-- Scroll to top button -->
   <button class="scroll-to-top" onclick="scrollToTop()" aria-label="Scroll to top">↑</button>
   
+  <!-- Gamification System -->
+  <div id="gamification-panel" class="gamification-panel">
+    <div class="gamification-header">
+      <h4>🏆 Achievements</h4>
+      <button class="close-gamification" onclick="toggleGamification()">×</button>
+    </div>
+    <div class="achievement-list" id="achievementList">
+      <!-- Achievements will be populated by JavaScript -->
+    </div>
+    <div class="progress-tracker">
+      <h5>📊 Portfolio Progress</h5>
+      <div class="progress-bar">
+        <div class="progress-fill" id="portfolioProgress"></div>
+      </div>
+      <span id="progressText">0% Complete</span>
+    </div>
+  </div>
+  
+  <!-- Gamification Toggle Button -->
+  <button id="gamification-toggle" class="gamification-toggle" onclick="toggleGamification()">
+    🎮
+  </button>
+  
+  <!-- Achievement Notification -->
+  <div id="achievement-notification" class="achievement-notification">
+    <div class="achievement-content">
+      <span class="achievement-icon">🏆</span>
+      <div class="achievement-text">
+        <h4 id="achievement-title">Achievement Unlocked!</h4>
+        <p id="achievement-description">You've discovered a new feature!</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Interactive Quiz Modal -->
+  <div id="quiz-modal" class="modal">
+    <div class="modal-content quiz-modal-content">
+      <div class="modal-header">
+        <h2>🧠 Test Your Knowledge</h2>
+        <span class="close" onclick="closeQuiz()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div id="quiz-container">
+          <div class="quiz-question" id="quizQuestion">
+            <h3 id="questionText">Loading question...</h3>
+            <div class="quiz-options" id="quizOptions">
+              <!-- Options will be populated by JavaScript -->
+            </div>
+          </div>
+          <div class="quiz-progress">
+            <div class="quiz-progress-bar">
+              <div class="quiz-progress-fill" id="quizProgressFill"></div>
+            </div>
+            <span id="quizProgressText">Question 1 of 5</span>
+          </div>
+        </div>
+        <div id="quiz-results" class="quiz-results" style="display: none;">
+          <h3>🎉 Quiz Complete!</h3>
+          <div class="quiz-score">
+            <span id="quizScore">0</span>/5
+          </div>
+          <p id="quizMessage">Great job!</p>
+          <button class="btn btn-primary" onclick="closeQuiz()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Theme Customization Panel -->
+  <div id="theme-panel" class="theme-panel">
+    <div class="theme-header">
+      <h4>🎨 Customize Theme</h4>
+      <button class="close-theme" onclick="toggleThemePanel()">×</button>
+    </div>
+    <div class="theme-options">
+      <div class="theme-section">
+        <h5>Color Schemes</h5>
+        <div class="color-schemes">
+          <div class="color-scheme" data-theme="default" onclick="changeColorScheme('default')">
+            <div class="color-preview default"></div>
+            <span>Default</span>
+          </div>
+          <div class="color-scheme" data-theme="dark" onclick="changeColorScheme('dark')">
+            <div class="color-preview dark"></div>
+            <span>Dark</span>
+          </div>
+          <div class="color-scheme" data-theme="blue" onclick="changeColorScheme('blue')">
+            <div class="color-preview blue"></div>
+            <span>Ocean</span>
+          </div>
+          <div class="color-scheme" data-theme="purple" onclick="changeColorScheme('purple')">
+            <div class="color-preview purple"></div>
+            <span>Purple</span>
+          </div>
+        </div>
+      </div>
+      <div class="theme-section">
+        <h5>Accessibility</h5>
+        <div class="accessibility-options">
+          <label class="accessibility-option">
+            <input type="checkbox" id="highContrast" onchange="toggleHighContrast()">
+            <span>High Contrast</span>
+          </label>
+          <label class="accessibility-option">
+            <input type="checkbox" id="largeText" onchange="toggleLargeText()">
+            <span>Large Text</span>
+          </label>
+          <label class="accessibility-option">
+            <input type="checkbox" id="reducedMotion" onchange="toggleReducedMotion()">
+            <span>Reduce Motion</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Theme Toggle Button -->
+  <button id="theme-toggle" class="theme-toggle" onclick="toggleThemePanel()">
+    🎨
+  </button>
+  
+  <!-- Language Selector -->
+  <div id="language-selector" class="language-selector">
+    <button class="language-btn" onclick="toggleLanguageMenu()">
+      🌐 <span id="current-lang">EN</span>
+    </button>
+    <div class="language-menu" id="languageMenu">
+      <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
+      <div class="language-option" onclick="changeLanguage('hi')">🇮🇳 हिन्दी</div>
+      <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
+      <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
+    </div>
+  </div>
+  
+  <!-- 3D Scene Container -->
+  <div id="webgl-container" class="webgl-container">
+    <canvas id="webgl-canvas"></canvas>
+    <div class="webgl-controls">
+      <button id="toggle-3d" class="btn-3d" onclick="toggle3DScene()">🎮 3D Mode</button>
+      <button id="toggle-particles" class="btn-3d" onclick="toggleParticles()">✨ Particles</button>
+    </div>
+  </div>
+  
+  <!-- 3D Project Cards -->
+  <div class="project-3d-container" id="project3DContainer">
+    <div class="project-3d-card" data-project="focal-point">
+      <div class="project-3d-front">
+        <h3>Focal Point</h3>
+        <p>Project Management Tool</p>
+      </div>
+      <div class="project-3d-back">
+        <h4>MERN Stack</h4>
+        <p>Full-stack project management with real-time collaboration</p>
+        <button onclick="openProjectModal('focal-point')">View Details</button>
+      </div>
+    </div>
+    
+    <div class="project-3d-card" data-project="salesgenie">
+      <div class="project-3d-front">
+        <h3>SalesGenie</h3>
+        <p>AI Outlook Plugin</p>
+      </div>
+      <div class="project-3d-back">
+        <h4>AI Integration</h4>
+        <p>AI-powered email automation with Gemini API</p>
+        <button onclick="openProjectModal('salesgenie')">View Details</button>
+      </div>
+    </div>
+    
+    <div class="project-3d-card" data-project="jobhunt">
+      <div class="project-3d-front">
+        <h3>JobHunt</h3>
+        <p>Job Portal</p>
+      </div>
+      <div class="project-3d-back">
+        <h4>MERN Stack</h4>
+        <p>Complete job portal with authentication and matching</p>
+        <button onclick="openProjectModal('jobhunt')">View Details</button>
+      </div>
+    </div>
+  </div>
+  
   <!-- Modern JavaScript features -->
   <script>
     // Dark mode functionality
@@ -2865,6 +3934,850 @@
           }
         });
       }
+    });
+    
+    // Gamification System
+    let achievements = [
+      { id: 'first_visit', title: 'Welcome!', description: 'First time visitor', icon: '👋', unlocked: false },
+      { id: 'scroll_explorer', title: 'Scroll Explorer', description: 'Scrolled through 50% of the page', icon: '📜', unlocked: false },
+      { id: 'project_viewer', title: 'Project Viewer', description: 'Viewed all project modals', icon: '👀', unlocked: false },
+      { id: 'quiz_master', title: 'Quiz Master', description: 'Completed the skills quiz', icon: '🧠', unlocked: false },
+      { id: 'theme_changer', title: 'Theme Changer', description: 'Changed the color theme', icon: '🎨', unlocked: false },
+      { id: 'language_learner', title: 'Language Learner', description: 'Changed the language', icon: '🌐', unlocked: false },
+      { id: 'contact_form', title: 'Contact Form', description: 'Completed the contact form', icon: '📝', unlocked: false },
+      { id: 'easter_egg', title: 'Easter Egg Hunter', description: 'Found the hidden easter egg', icon: '🥚', unlocked: false }
+    ];
+    
+    let portfolioProgress = 0;
+    let visitedSections = new Set();
+    let viewedProjects = new Set();
+    
+    // Quiz System
+    const quizQuestions = [
+      {
+        question: "What is the primary technology stack I specialize in?",
+        options: ["LAMP", "MERN", "MEAN", "Django"],
+        correct: 1
+      },
+      {
+        question: "Which cloud platform do I have experience with?",
+        options: ["Azure", "AWS", "Google Cloud", "All of the above"],
+        correct: 3
+      },
+      {
+        question: "What type of AI integration have I worked with?",
+        options: ["OpenAI API", "Gemini API", "Custom ML models", "All of the above"],
+        correct: 3
+      },
+      {
+        question: "Which database technologies am I proficient in?",
+        options: ["MongoDB only", "SQL databases only", "Both SQL and NoSQL", "None"],
+        correct: 2
+      },
+      {
+        question: "What is my current role?",
+        options: ["Junior Developer", "Full Stack Developer", "DevOps Engineer", "UI/UX Designer"],
+        correct: 1
+      }
+    ];
+    
+    let currentQuizQuestion = 0;
+    let quizScore = 0;
+    let quizAnswers = [];
+    
+    // Language translations
+    const translations = {
+      en: {
+        hero: {
+          subheading: "Hello! I'm",
+          title: "Building Intelligent, User-Centric Platforms with Modern Web Technologies",
+          description: "Experienced in MERN Stack, AI/ML, Cloud Technologies & DevOps"
+        },
+        nav: {
+          home: "Home",
+          about: "About",
+          skills: "Skills",
+          experience: "Experience",
+          projects: "Projects",
+          testimonials: "Testimonials",
+          contact: "Contact"
+        }
+      },
+      hi: {
+        hero: {
+          subheading: "नमस्ते! मैं हूँ",
+          title: "आधुनिक वेब तकनीकों के साथ बुद्धिमान, उपयोगकर्ता-केंद्रित प्लेटफॉर्म बनाना",
+          description: "MERN Stack, AI/ML, क्लाउड टेक्नोलॉजी और DevOps में अनुभवी"
+        },
+        nav: {
+          home: "होम",
+          about: "के बारे में",
+          skills: "कौशल",
+          experience: "अनुभव",
+          projects: "प्रोजेक्ट",
+          testimonials: "प्रशंसापत्र",
+          contact: "संपर्क"
+        }
+      },
+      es: {
+        hero: {
+          subheading: "¡Hola! Soy",
+          title: "Construyendo Plataformas Inteligentes y Centradas en el Usuario con Tecnologías Web Modernas",
+          description: "Experto en MERN Stack, AI/ML, Tecnologías Cloud y DevOps"
+        },
+        nav: {
+          home: "Inicio",
+          about: "Acerca de",
+          skills: "Habilidades",
+          experience: "Experiencia",
+          projects: "Proyectos",
+          testimonials: "Testimonios",
+          contact: "Contacto"
+        }
+      },
+      fr: {
+        hero: {
+          subheading: "Bonjour! Je suis",
+          title: "Construire des Plateformes Intelligentes et Centrées sur l'Utilisateur avec des Technologies Web Modernes",
+          description: "Expérimenté en MERN Stack, IA/ML, Technologies Cloud et DevOps"
+        },
+        nav: {
+          home: "Accueil",
+          about: "À propos",
+          skills: "Compétences",
+          experience: "Expérience",
+          projects: "Projets",
+          testimonials: "Témoignages",
+          contact: "Contact"
+        }
+      }
+    };
+    
+    let currentLanguage = 'en';
+    
+    // Gamification Functions
+    function toggleGamification() {
+      const panel = document.getElementById('gamification-panel');
+      panel.classList.toggle('open');
+      updateAchievements();
+      updateProgress();
+    }
+    
+    function updateAchievements() {
+      const achievementList = document.getElementById('achievementList');
+      if (!achievementList) return;
+      
+      achievementList.innerHTML = '';
+      
+      achievements.forEach(achievement => {
+        const achievementItem = document.createElement('div');
+        achievementItem.className = `achievement-item ${achievement.unlocked ? 'unlocked' : ''}`;
+        achievementItem.innerHTML = `
+          <span class="achievement-icon">${achievement.icon}</span>
+          <div class="achievement-info">
+            <h5>${achievement.title}</h5>
+            <p>${achievement.description}</p>
+          </div>
+        `;
+        achievementList.appendChild(achievementItem);
+      });
+    }
+    
+    function unlockAchievement(achievementId) {
+      const achievement = achievements.find(a => a.id === achievementId);
+      if (achievement && !achievement.unlocked) {
+        achievement.unlocked = true;
+        showAchievementNotification(achievement);
+        updateAchievements();
+        saveProgress();
+      }
+    }
+    
+    function showAchievementNotification(achievement) {
+      const notification = document.getElementById('achievement-notification');
+      const title = document.getElementById('achievement-title');
+      const description = document.getElementById('achievement-description');
+      
+      if (notification && title && description) {
+        title.textContent = achievement.title;
+        description.textContent = achievement.description;
+        
+        notification.classList.add('show');
+        
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 3000);
+      }
+    }
+    
+    function updateProgress() {
+      const progressBar = document.getElementById('portfolioProgress');
+      const progressText = document.getElementById('progressText');
+      
+      if (!progressBar || !progressText) return;
+      
+      const totalSections = 6; // About, Skills, Experience, Projects, Testimonials, Contact
+      const progress = (visitedSections.size / totalSections) * 100;
+      
+      portfolioProgress = Math.max(portfolioProgress, progress);
+      progressBar.style.width = portfolioProgress + '%';
+      progressText.textContent = Math.round(portfolioProgress) + '% Complete';
+      
+      if (portfolioProgress >= 100) {
+        unlockAchievement('scroll_explorer');
+      }
+    }
+    
+    function trackSectionVisit(sectionId) {
+      visitedSections.add(sectionId);
+      updateProgress();
+    }
+    
+    function trackProjectView(projectId) {
+      viewedProjects.add(projectId);
+      if (viewedProjects.size >= 3) {
+        unlockAchievement('project_viewer');
+      }
+    }
+    
+    // Quiz Functions
+    function openQuiz() {
+      const modal = document.getElementById('quiz-modal');
+      if (modal) {
+        modal.style.display = 'block';
+        currentQuizQuestion = 0;
+        quizScore = 0;
+        quizAnswers = [];
+        showQuizQuestion();
+      }
+    }
+    
+    function closeQuiz() {
+      const modal = document.getElementById('quiz-modal');
+      if (modal) {
+        modal.style.display = 'none';
+      }
+    }
+    
+    function showQuizQuestion() {
+      const question = quizQuestions[currentQuizQuestion];
+      const questionText = document.getElementById('questionText');
+      const quizOptions = document.getElementById('quizOptions');
+      const quizProgressFill = document.getElementById('quizProgressFill');
+      const quizProgressText = document.getElementById('quizProgressText');
+      
+      if (!questionText || !quizOptions) return;
+      
+      questionText.textContent = question.question;
+      quizOptions.innerHTML = '';
+      
+      question.options.forEach((option, index) => {
+        const optionElement = document.createElement('div');
+        optionElement.className = 'quiz-option';
+        optionElement.textContent = option;
+        optionElement.onclick = () => selectQuizAnswer(index);
+        quizOptions.appendChild(optionElement);
+      });
+      
+      if (quizProgressFill && quizProgressText) {
+        const progress = ((currentQuizQuestion + 1) / quizQuestions.length) * 100;
+        quizProgressFill.style.width = progress + '%';
+        quizProgressText.textContent = `Question ${currentQuizQuestion + 1} of ${quizQuestions.length}`;
+      }
+    }
+    
+    function selectQuizAnswer(selectedIndex) {
+      const question = quizQuestions[currentQuizQuestion];
+      const options = document.querySelectorAll('.quiz-option');
+      
+      // Disable all options
+      options.forEach(option => {
+        option.style.pointerEvents = 'none';
+      });
+      
+      // Mark correct and incorrect answers
+      options.forEach((option, index) => {
+        if (index === question.correct) {
+          option.classList.add('correct');
+        } else if (index === selectedIndex && index !== question.correct) {
+          option.classList.add('incorrect');
+        }
+      });
+      
+      // Store answer
+      quizAnswers.push(selectedIndex);
+      if (selectedIndex === question.correct) {
+        quizScore++;
+      }
+      
+      // Move to next question after delay
+      setTimeout(() => {
+        currentQuizQuestion++;
+        if (currentQuizQuestion < quizQuestions.length) {
+          showQuizQuestion();
+        } else {
+          showQuizResults();
+        }
+      }, 2000);
+    }
+    
+    function showQuizResults() {
+      const quizContainer = document.getElementById('quiz-container');
+      const quizResults = document.getElementById('quiz-results');
+      const quizScoreElement = document.getElementById('quizScore');
+      const quizMessage = document.getElementById('quizMessage');
+      
+      if (quizContainer && quizResults) {
+        quizContainer.style.display = 'none';
+        quizResults.style.display = 'block';
+      }
+      
+      if (quizScoreElement && quizMessage) {
+        quizScoreElement.textContent = quizScore;
+        
+        if (quizScore === quizQuestions.length) {
+          quizMessage.textContent = 'Perfect! You know me well!';
+          unlockAchievement('quiz_master');
+        } else if (quizScore >= quizQuestions.length * 0.8) {
+          quizMessage.textContent = 'Excellent! Great knowledge!';
+          unlockAchievement('quiz_master');
+        } else if (quizScore >= quizQuestions.length * 0.6) {
+          quizMessage.textContent = 'Good job! Keep learning!';
+        } else {
+          quizMessage.textContent = 'Nice try! Explore more to learn about me!';
+        }
+      }
+    }
+    
+    // Theme Functions
+    function toggleThemePanel() {
+      const panel = document.getElementById('theme-panel');
+      if (panel) {
+        panel.classList.toggle('open');
+      }
+    }
+    
+    function changeColorScheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      
+      // Update active state
+      document.querySelectorAll('.color-scheme').forEach(scheme => {
+        scheme.classList.remove('active');
+      });
+      const activeScheme = document.querySelector(`[data-theme="${theme}"]`);
+      if (activeScheme) {
+        activeScheme.classList.add('active');
+      }
+      
+      unlockAchievement('theme_changer');
+    }
+    
+    function toggleHighContrast() {
+      document.body.classList.toggle('high-contrast');
+      localStorage.setItem('highContrast', document.body.classList.contains('high-contrast'));
+    }
+    
+    function toggleLargeText() {
+      document.body.classList.toggle('large-text');
+      localStorage.setItem('largeText', document.body.classList.contains('large-text'));
+    }
+    
+    function toggleReducedMotion() {
+      document.body.classList.toggle('reduced-motion');
+      localStorage.setItem('reducedMotion', document.body.classList.contains('reduced-motion'));
+    }
+    
+    // Language Functions
+    function toggleLanguageMenu() {
+      const menu = document.getElementById('languageMenu');
+      if (menu) {
+        menu.classList.toggle('show');
+      }
+    }
+    
+    function changeLanguage(lang) {
+      currentLanguage = lang;
+      const currentLangElement = document.getElementById('current-lang');
+      if (currentLangElement) {
+        currentLangElement.textContent = lang.toUpperCase();
+      }
+      
+      const translation = translations[lang];
+      if (translation) {
+        // Update hero section
+        const heroTitle = document.querySelector('.hero-content h2');
+        const heroDescription = document.querySelector('.hero-content p');
+        if (heroTitle) heroTitle.textContent = translation.hero.title;
+        if (heroDescription) heroDescription.textContent = translation.hero.description;
+        
+        // Update navigation
+        const navLinks = document.querySelectorAll('.nav-link span');
+        const navTexts = ['home', 'about', 'skills', 'experience', 'projects', 'testimonials', 'contact'];
+        navLinks.forEach((link, index) => {
+          if (translation.nav[navTexts[index]]) {
+            link.textContent = translation.nav[navTexts[index]];
+          }
+        });
+      }
+      
+      const languageMenu = document.getElementById('languageMenu');
+      if (languageMenu) {
+        languageMenu.classList.remove('show');
+      }
+      unlockAchievement('language_learner');
+    }
+    
+    // Easter Egg Functions
+    function checkEasterEgg() {
+      // Konami Code: ↑↑↓↓←→←→BA
+      let konamiCode = [];
+      const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+      
+      document.addEventListener('keydown', function(e) {
+        konamiCode.push(e.keyCode);
+        if (konamiCode.length > konamiSequence.length) {
+          konamiCode.shift();
+        }
+        
+        if (konamiCode.length === konamiSequence.length) {
+          let match = true;
+          for (let i = 0; i < konamiSequence.length; i++) {
+            if (konamiCode[i] !== konamiSequence[i]) {
+              match = false;
+              break;
+            }
+          }
+          
+          if (match) {
+            unlockAchievement('easter_egg');
+            showEasterEggEffect();
+            konamiCode = [];
+          }
+        }
+      });
+    }
+    
+    function showEasterEggEffect() {
+      // Create confetti effect
+      for (let i = 0; i < 50; i++) {
+        createConfetti();
+      }
+    }
+    
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.style.position = 'fixed';
+      confetti.style.width = '10px';
+      confetti.style.height = '10px';
+      confetti.style.backgroundColor = ['#ffbd39', '#ff6b35', '#27ae60', '#3498db', '#9b59b6'][Math.floor(Math.random() * 5)];
+      confetti.style.left = Math.random() * window.innerWidth + 'px';
+      confetti.style.top = '-10px';
+      confetti.style.zIndex = '9999';
+      confetti.style.borderRadius = '50%';
+      confetti.style.pointerEvents = 'none';
+      
+      document.body.appendChild(confetti);
+      
+      const animation = confetti.animate([
+        { transform: 'translateY(0px) rotate(0deg)', opacity: 1 },
+        { transform: `translateY(${window.innerHeight + 100}px) rotate(720deg)`, opacity: 0 }
+      ], {
+        duration: 3000,
+        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+      });
+      
+      animation.onfinish = () => {
+        confetti.remove();
+      };
+    }
+    
+    // Progress Tracking
+    function saveProgress() {
+      const progressData = {
+        achievements: achievements,
+        portfolioProgress: portfolioProgress,
+        visitedSections: Array.from(visitedSections),
+        viewedProjects: Array.from(viewedProjects),
+        currentLanguage: currentLanguage
+      };
+      localStorage.setItem('portfolioProgress', JSON.stringify(progressData));
+    }
+    
+    function loadProgress() {
+      const savedProgress = localStorage.getItem('portfolioProgress');
+      if (savedProgress) {
+        const progressData = JSON.parse(savedProgress);
+        achievements = progressData.achievements || achievements;
+        portfolioProgress = progressData.portfolioProgress || 0;
+        visitedSections = new Set(progressData.visitedSections || []);
+        viewedProjects = new Set(progressData.viewedProjects || []);
+        currentLanguage = progressData.currentLanguage || 'en';
+      }
+    }
+    
+    // Enhanced Project Modal with tracking
+    function openProjectModalEnhanced(projectId) {
+      const modal = document.getElementById(projectId + '-modal');
+      if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        trackProjectView(projectId);
+      }
+    }
+    
+    // Intersection Observer for section tracking
+    function initializeSectionTracking() {
+      const sections = ['about-section', 'skills-section', 'resume-section', 'projects-section', 'testimonials-section', 'contact-section'];
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            trackSectionVisit(sectionId);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      sections.forEach(sectionId => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          observer.observe(section);
+        }
+      });
+    }
+    
+    // Initialize gamification when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load saved progress
+      loadProgress();
+      
+      // Initialize accessibility settings
+      if (localStorage.getItem('highContrast') === 'true') {
+        document.body.classList.add('high-contrast');
+        const highContrastCheckbox = document.getElementById('highContrast');
+        if (highContrastCheckbox) highContrastCheckbox.checked = true;
+      }
+      if (localStorage.getItem('largeText') === 'true') {
+        document.body.classList.add('large-text');
+        const largeTextCheckbox = document.getElementById('largeText');
+        if (largeTextCheckbox) largeTextCheckbox.checked = true;
+      }
+      if (localStorage.getItem('reducedMotion') === 'true') {
+        document.body.classList.add('reduced-motion');
+        const reducedMotionCheckbox = document.getElementById('reducedMotion');
+        if (reducedMotionCheckbox) reducedMotionCheckbox.checked = true;
+      }
+      
+      // Initialize gamification
+      initializeSectionTracking();
+      checkEasterEgg();
+      
+      // Unlock first visit achievement
+      setTimeout(() => {
+        unlockAchievement('first_visit');
+      }, 1000);
+      
+      // Add quiz button to skills section
+      const skillsSection = document.getElementById('skills-section');
+      if (skillsSection) {
+        const quizButton = document.createElement('button');
+        quizButton.className = 'btn btn-primary';
+        quizButton.innerHTML = '🧠 Test Your Knowledge';
+        quizButton.onclick = openQuiz;
+        quizButton.style.marginTop = '20px';
+        const container = skillsSection.querySelector('.container');
+        if (container) {
+          container.appendChild(quizButton);
+        }
+      }
+      
+      // Override project modal function to include tracking
+      window.openProjectModal = openProjectModalEnhanced;
+    });
+    
+    // 3D Elements and WebGL Effects
+    let is3DMode = false;
+    let isParticlesEnabled = false;
+    let webglScene = null;
+    let particles = [];
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    // WebGL Particle System
+    class Particle {
+      constructor() {
+        this.x = Math.random() * window.innerWidth;
+        this.y = Math.random() * window.innerHeight;
+        this.vx = (Math.random() - 0.5) * 2;
+        this.vy = (Math.random() - 0.5) * 2;
+        this.size = Math.random() * 3 + 1;
+        this.opacity = Math.random() * 0.5 + 0.2;
+        this.color = this.getRandomColor();
+      }
+      
+      getRandomColor() {
+        const colors = ['#ffbd39', '#ff6b35', '#27ae60', '#3498db', '#9b59b6'];
+        return colors[Math.floor(Math.random() * colors.length)];
+      }
+      
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        
+        // Mouse interaction
+        const dx = mouseX - this.x;
+        const dy = mouseY - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 100) {
+          const force = (100 - distance) / 100;
+          this.vx += (dx / distance) * force * 0.1;
+          this.vy += (dy / distance) * force * 0.1;
+        }
+        
+        // Boundary check
+        if (this.x < 0 || this.x > window.innerWidth) this.vx *= -1;
+        if (this.y < 0 || this.y > window.innerHeight) this.vy *= -1;
+        
+        // Friction
+        this.vx *= 0.99;
+        this.vy *= 0.99;
+      }
+      
+      draw(ctx) {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+    
+    // Initialize WebGL Scene
+    function initWebGLScene() {
+      const canvas = document.getElementById('webgl-canvas');
+      if (!canvas) return;
+      
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      // Create particles
+      for (let i = 0; i < 100; i++) {
+        particles.push(new Particle());
+      }
+      
+      // Mouse tracking
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+      
+      // Animation loop
+      function animate() {
+        if (is3DMode && isParticlesEnabled) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          particles.forEach(particle => {
+            particle.update();
+            particle.draw(ctx);
+          });
+          
+          // Draw connections
+          drawConnections(ctx);
+        }
+        
+        requestAnimationFrame(animate);
+      }
+      
+      animate();
+    }
+    
+    // Draw particle connections
+    function drawConnections(ctx) {
+      ctx.save();
+      ctx.strokeStyle = 'rgba(255, 189, 57, 0.2)';
+      ctx.lineWidth = 1;
+      
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            ctx.globalAlpha = (100 - distance) / 100 * 0.3;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      
+      ctx.restore();
+    }
+    
+    // 3D Functions
+    function toggle3DScene() {
+      const container = document.getElementById('webgl-container');
+      const projectContainer = document.getElementById('project3DContainer');
+      
+      is3DMode = !is3DMode;
+      
+      if (is3DMode) {
+        container.classList.add('active');
+        projectContainer.classList.add('active');
+        initWebGLScene();
+        add3DEffects();
+      } else {
+        container.classList.remove('active');
+        projectContainer.classList.remove('active');
+        remove3DEffects();
+      }
+    }
+    
+    function toggleParticles() {
+      isParticlesEnabled = !isParticlesEnabled;
+      const button = document.getElementById('toggle-particles');
+      
+      if (isParticlesEnabled) {
+        button.textContent = '✨ Particles ON';
+        button.style.background = 'linear-gradient(45deg, #27ae60, #2ecc71)';
+      } else {
+        button.textContent = '✨ Particles';
+        button.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
+      }
+    }
+    
+    // Add 3D effects to existing elements
+    function add3DEffects() {
+      // Add 3D class to project cards
+      const projectCards = document.querySelectorAll('.project-card');
+      projectCards.forEach(card => {
+        card.classList.add('project-card-3d');
+      });
+      
+      // Add 3D class to skill items
+      const skillItems = document.querySelectorAll('.skill-item');
+      skillItems.forEach(item => {
+        item.classList.add('skill-item-3d');
+      });
+      
+      // Add 3D text effect to headings
+      const headings = document.querySelectorAll('h1, h2, h3');
+      headings.forEach(heading => {
+        heading.classList.add('text-3d');
+      });
+      
+      // Add 3D button effects
+      const buttons = document.querySelectorAll('.btn');
+      buttons.forEach(button => {
+        button.classList.add('btn-3d-effect');
+      });
+      
+      // Add 3D modal effects
+      const modals = document.querySelectorAll('.modal-content');
+      modals.forEach(modal => {
+        modal.classList.add('modal-3d');
+      });
+    }
+    
+    function remove3DEffects() {
+      // Remove 3D classes
+      document.querySelectorAll('.project-card-3d').forEach(el => el.classList.remove('project-card-3d'));
+      document.querySelectorAll('.skill-item-3d').forEach(el => el.classList.remove('skill-item-3d'));
+      document.querySelectorAll('.text-3d').forEach(el => el.classList.remove('text-3d'));
+      document.querySelectorAll('.btn-3d-effect').forEach(el => el.classList.remove('btn-3d-effect'));
+      document.querySelectorAll('.modal-3d').forEach(el => el.classList.remove('modal-3d'));
+    }
+    
+    // 3D Parallax Scrolling
+    function init3DParallax() {
+      const layers = [
+        { element: '.parallax-layer-1', speed: 0.5 },
+        { element: '.parallax-layer-2', speed: 0.3 },
+        { element: '.parallax-layer-3', speed: 0.1 }
+      ];
+      
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        
+        layers.forEach(layer => {
+          const elements = document.querySelectorAll(layer.element);
+          elements.forEach(element => {
+            const yPos = -(scrolled * layer.speed);
+            element.style.transform = `translateY(${yPos}px)`;
+          });
+        });
+      });
+    }
+    
+    // 3D Tech Icons Animation
+    function init3DTechIcons() {
+      const techIcons = ['⚛️', '🚀', '💻', '🔧'];
+      const heroSection = document.querySelector('.hero');
+      
+      if (heroSection) {
+        techIcons.forEach((icon, index) => {
+          const iconElement = document.createElement('div');
+          iconElement.className = 'tech-icon-3d';
+          iconElement.textContent = icon;
+          iconElement.style.animationDelay = `${index * 0.5}s`;
+          heroSection.appendChild(iconElement);
+        });
+      }
+    }
+    
+    // 3D Loading Animation
+    function show3DLoading() {
+      const loadingElement = document.createElement('div');
+      loadingElement.className = 'loading-3d';
+      loadingElement.style.position = 'fixed';
+      loadingElement.style.top = '50%';
+      loadingElement.style.left = '50%';
+      loadingElement.style.transform = 'translate(-50%, -50%)';
+      loadingElement.style.zIndex = '9999';
+      
+      document.body.appendChild(loadingElement);
+      
+      setTimeout(() => {
+        loadingElement.remove();
+      }, 2000);
+    }
+    
+    // Initialize 3D features when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize 3D parallax
+      init3DParallax();
+      
+      // Initialize 3D tech icons
+      init3DTechIcons();
+      
+      // Add 3D parallax layers
+      const parallaxLayers = [
+        { className: 'parallax-layer parallax-layer-1' },
+        { className: 'parallax-layer parallax-layer-2' },
+        { className: 'parallax-layer parallax-layer-3' }
+      ];
+      
+      parallaxLayers.forEach(layer => {
+        const layerElement = document.createElement('div');
+        layerElement.className = layer.className;
+        document.body.appendChild(layerElement);
+      });
+      
+      // Resize handler for WebGL canvas
+      window.addEventListener('resize', () => {
+        const canvas = document.getElementById('webgl-canvas');
+        if (canvas) {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+      });
     });
   </script>
     
